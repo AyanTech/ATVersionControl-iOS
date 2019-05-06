@@ -1,15 +1,19 @@
 # ATVersionControl
 
-[![CI Status](https://img.shields.io/travis/Sepehr  Behroozi/ATVersionControl.svg?style=flat)](https://travis-ci.org/Sepehr  Behroozi/ATVersionControl)
-[![Version](https://img.shields.io/cocoapods/v/ATVersionControl.svg?style=flat)](https://cocoapods.org/pods/ATVersionControl)
-[![License](https://img.shields.io/cocoapods/l/ATVersionControl.svg?style=flat)](https://cocoapods.org/pods/ATVersionControl)
-[![Platform](https://img.shields.io/cocoapods/p/ATVersionControl.svg?style=flat)](https://cocoapods.org/pods/ATVersionControl)
+##### Check the latest version of app with AyanTech servers<span style="color:red;">*</span>
 
-## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+<span style="color:red;">*</span> *app should be registered in AyanTechServers*
 
-## Requirements
+## Usage
+
+To configure the parameters use this:
+```swift
+VersionControl.shared.applicationName = "MyAppName"
+VersionControl.shared.categoryName = "cat"
+VersionControl.shared.version = "1.0.0" //default version is CFBundleShortVersionString
+VersionControl.shared.extraInfo["Token"] = "Test" //Json object and optional
+```
 
 ## Installation
 
@@ -23,7 +27,3 @@ pod 'ATVersionControl'
 ## Author
 
 Sepehr  Behroozi, 3pehrbehroozi@gmail.com
-
-## License
-
-ATVersionControl is available under the MIT license. See the LICENSE file for more info.
