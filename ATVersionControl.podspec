@@ -9,34 +9,22 @@
 Pod::Spec.new do |s|
   s.name             = 'ATVersionControl'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of ATVersionControl.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
+  s.summary          = 'Version control library for AyanTech iOS apps'
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Library to check for new version of app with AyanTech servers
                        DESC
-
-  s.homepage         = 'https://github.com/Sepehr  Behroozi/ATVersionControl'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.homepage         = 'https://github.com/AyanTech/ATVersionControl-iOS.git'
+  s.license          = { :type => 'Apache License 2.0', :file => 'LICENSE' }
   s.author           = { 'Sepehr  Behroozi' => '3pehrbehroozi@gmail.com' }
-  s.source           = { :git => 'https://github.com/Sepehr  Behroozi/ATVersionControl.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/AyanTech/ATVersionControl-iOS.git', :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/3pehrbehroozi'
 
-  s.ios.deployment_target = '8.0'
-
+  s.ios.deployment_target = '10.0'
+  s.swift_version = "5.0"
   s.source_files = 'ATVersionControl/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'ATVersionControl' => ['ATVersionControl/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.frameworks = 'UIKit', 'Foundation'
+  s.dependency 'SwiftBooster'
+  s.dependency 'PopupDialog'
+  s.dependency 'AyanTechNetworkingLibrary'
 end

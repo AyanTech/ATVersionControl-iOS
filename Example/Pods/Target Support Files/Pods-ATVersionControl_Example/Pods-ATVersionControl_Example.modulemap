@@ -1,0 +1,6 @@
+framework module Pods_ATVersionControl_Example {
+  umbrella header "Pods-ATVersionControl_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

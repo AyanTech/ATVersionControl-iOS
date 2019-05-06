@@ -1,0 +1,16 @@
+PODS:
+  - ATVersionControl (0.1.0)
+
+DEPENDENCIES:
+  - ATVersionControl (from `../`)
+
+EXTERNAL SOURCES:
+  ATVersionControl:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ATVersionControl: c725648dca28b5897f9367609caf33b2af5af572
+
+PODFILE CHECKSUM: e26f86d62dad1233e3fa6057fb2f8a1700558e43
+
+COCOAPODS: 1.6.1
