@@ -85,7 +85,7 @@ public class VersionControl {
     }
     
     private func showUpdateDialog(updateStatus: UpdateStatus, versionInfo: VersionInfo) {
-        var dialogMessage = versionInfo.body + "\n" + versionInfo.changeLogs.joined(separator: "\n")
+        let dialogMessage = versionInfo.body + "\n" + versionInfo.changeLogs.joined(separator: "\n")
         let dialog = PopupDialog(title: versionInfo.title, message: dialogMessage, tapGestureDismissal: updateStatus == .optional, panGestureDismissal: updateStatus == .optional)
         let acceptButton = PopupDialogButton.init(title: versionInfo.acceptButtonText, action: {
             if let url = URL(string: versionInfo.link), UIApplication.shared.canOpenURL(url) {
