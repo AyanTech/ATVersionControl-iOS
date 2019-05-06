@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ATVersionControl_Example' do
+  pod 'ATVersionControl', :path => '../'
+
+  target 'ATVersionControl_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
