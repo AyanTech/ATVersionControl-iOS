@@ -69,12 +69,14 @@ public class VersionControl {
     private func getLastVersion(_ completionHandler: ((VersionInfo?, ATError?) -> Void)? = nil) {
         ATRequest.request(url: ATUrl.getLastVersion, method: .post)
         .setJsonBody(body: [
-            "ApplicationName": self.applicationName,
-            "ApplicationType": "ios",
-            "CategoryName": self.categoryName,
-            "CurrentApplicationVersion": self.version,
-            "ExtraInfo": self.extraInfo
-        ])
+            "Parameters": [
+                "ApplicationName": self.applicationName,
+                "ApplicationType": "ios",
+                "CategoryName": self.categoryName,
+                "CurrentApplicationVersion": self.version,
+                "ExtraInfo": self.extraInfo
+            ]
+        ], ignoreParameterCreator: true)
             .send { (response) in
                 if let versionInfo = VersionInfo.from(json: response.parametersJsonObject) {
                     completionHandler?(versionInfo, nil)
