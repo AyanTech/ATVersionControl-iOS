@@ -47,12 +47,14 @@ public class VersionControl {
     public func checkVersion() {
         ATRequest.request(url: ATUrl.checkVersion, method: .post)
         .setJsonBody(body: [
-            "ApplicationName":self.applicationName,
-            "ApplicationType": "ios",
-            "CategoryName": self.categoryName,
-            "CurrentApplicationVersion": self.version,
-            "ExtraInfo": self.extraInfo
-        ])
+            "Parameters": [
+                "ApplicationName":self.applicationName,
+                "ApplicationType": "ios",
+                "CategoryName": self.categoryName,
+                "CurrentApplicationVersion": self.version,
+                "ExtraInfo": self.extraInfo
+            ]
+        ], ignoreParameterCreator: true)
         .send(responseHandler: handleCheckVersionResponse(_:))
     }
     
