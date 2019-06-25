@@ -1,16 +1,35 @@
 PODS:
-  - ATVersionControl (0.1.0)
+  - ATVersionControl (0.1.1):
+    - AyanTechNetworkingLibrary (~> 1.6.1)
+    - PopupDialog
+    - SwiftBooster
+  - AyanTechNetworkingLibrary (1.6.1)
+  - DynamicBlurView (3.0.1)
+  - PopupDialog (1.1.0):
+    - DynamicBlurView (~> 3.0.1)
+  - SwiftBooster (0.1.0)
 
 DEPENDENCIES:
   - ATVersionControl (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AyanTechNetworkingLibrary
+    - DynamicBlurView
+    - PopupDialog
+    - SwiftBooster
 
 EXTERNAL SOURCES:
   ATVersionControl:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ATVersionControl: c725648dca28b5897f9367609caf33b2af5af572
+  ATVersionControl: d4a701351fd61f4e952a7f45f39e84eadf7384e6
+  AyanTechNetworkingLibrary: f5c5210935750722888eb453f98529518818bcdf
+  DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
+  PopupDialog: 42fb7a0bc4fafdf89fef8b5b2b127a6023f3e1cc
+  SwiftBooster: c7225b047820f23db7ddcbbbb9e39785c8c1bebf
 
-PODFILE CHECKSUM: e26f86d62dad1233e3fa6057fb2f8a1700558e43
+PODFILE CHECKSUM: e5bc33e0582088f73b035fbbb123c51c3160fceb
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.7.2

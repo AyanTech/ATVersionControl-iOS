@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B0D257A5B25F19E98F2BC36 /* Pods_ATVersionControl_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8639019FD4C78EBAFAE7DA2 /* Pods_ATVersionControl_Example.framework */; };
+		1A9ED70850F82E262E7945B8 /* Pods_ATVersionControl_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DF1565B8F4C50D7ECD6A5ED /* Pods_ATVersionControl_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		826029B50370F8DB60C7934B /* Pods_ATVersionControl_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 675C57959E465D1ED17E9103 /* Pods_ATVersionControl_Tests.framework */; };
+		C9FCB4273A1D3F13D89C424E /* Pods_ATVersionControl_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FC775A8E34A1CE6A2F15C48 /* Pods_ATVersionControl_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,9 +28,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		249D011C51F9F699CC2F4B81 /* Pods-ATVersionControl_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATVersionControl_Tests.debug.xcconfig"; path = "Target Support Files/Pods-ATVersionControl_Tests/Pods-ATVersionControl_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		194EC5BF4BF7B53147E5FC89 /* Pods-ATVersionControl_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATVersionControl_Example.debug.xcconfig"; path = "Target Support Files/Pods-ATVersionControl_Example/Pods-ATVersionControl_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		26F1A4ADB2B69C3BFFE9E388 /* ATVersionControl.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = ATVersionControl.podspec; path = ../ATVersionControl.podspec; sourceTree = "<group>"; };
-		55C388EB8E71ECE39C7113CE /* Pods-ATVersionControl_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATVersionControl_Example.release.xcconfig"; path = "Target Support Files/Pods-ATVersionControl_Example/Pods-ATVersionControl_Example.release.xcconfig"; sourceTree = "<group>"; };
+		2E08C3DA081F0F9D1B0D22CF /* Pods-ATVersionControl_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATVersionControl_Example.release.xcconfig"; path = "Target Support Files/Pods-ATVersionControl_Example/Pods-ATVersionControl_Example.release.xcconfig"; sourceTree = "<group>"; };
+		4DF1565B8F4C50D7ECD6A5ED /* Pods_ATVersionControl_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ATVersionControl_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* ATVersionControl_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ATVersionControl_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,12 +42,11 @@
 		607FACE51AFB9204008FA782 /* ATVersionControl_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ATVersionControl_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		675C57959E465D1ED17E9103 /* Pods_ATVersionControl_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ATVersionControl_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B412ED438020F84DA955283 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		77ABC111310A4D116C819347 /* Pods-ATVersionControl_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATVersionControl_Tests.release.xcconfig"; path = "Target Support Files/Pods-ATVersionControl_Tests/Pods-ATVersionControl_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		6DED581F9C5CF05CDC5FC984 /* Pods-ATVersionControl_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATVersionControl_Tests.release.xcconfig"; path = "Target Support Files/Pods-ATVersionControl_Tests/Pods-ATVersionControl_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		7FC775A8E34A1CE6A2F15C48 /* Pods_ATVersionControl_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ATVersionControl_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F548D4FB2F233C5502B2D04 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		C8639019FD4C78EBAFAE7DA2 /* Pods_ATVersionControl_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ATVersionControl_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FB10190AA13CCBCB798CFC65 /* Pods-ATVersionControl_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATVersionControl_Example.debug.xcconfig"; path = "Target Support Files/Pods-ATVersionControl_Example/Pods-ATVersionControl_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		F9EC719EEE05C14E5ADDA84F /* Pods-ATVersionControl_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ATVersionControl_Tests.debug.xcconfig"; path = "Target Support Files/Pods-ATVersionControl_Tests/Pods-ATVersionControl_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B0D257A5B25F19E98F2BC36 /* Pods_ATVersionControl_Example.framework in Frameworks */,
+				1A9ED70850F82E262E7945B8 /* Pods_ATVersionControl_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,13 +62,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				826029B50370F8DB60C7934B /* Pods_ATVersionControl_Tests.framework in Frameworks */,
+				C9FCB4273A1D3F13D89C424E /* Pods_ATVersionControl_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D50AB96EC72B399911EE27A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4DF1565B8F4C50D7ECD6A5ED /* Pods_ATVersionControl_Example.framework */,
+				7FC775A8E34A1CE6A2F15C48 /* Pods_ATVersionControl_Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -76,8 +85,8 @@
 				607FACD21AFB9204008FA782 /* Example for ATVersionControl */,
 				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
-				FCB2DF64A400E78B3F204926 /* Pods */,
-				CCC95E4B5DE417758EAACA38 /* Frameworks */,
+				FF7A41B0C63B07F71C5BB1BC /* Pods */,
+				0D50AB96EC72B399911EE27A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,22 +148,13 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		CCC95E4B5DE417758EAACA38 /* Frameworks */ = {
+		FF7A41B0C63B07F71C5BB1BC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C8639019FD4C78EBAFAE7DA2 /* Pods_ATVersionControl_Example.framework */,
-				675C57959E465D1ED17E9103 /* Pods_ATVersionControl_Tests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FCB2DF64A400E78B3F204926 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FB10190AA13CCBCB798CFC65 /* Pods-ATVersionControl_Example.debug.xcconfig */,
-				55C388EB8E71ECE39C7113CE /* Pods-ATVersionControl_Example.release.xcconfig */,
-				249D011C51F9F699CC2F4B81 /* Pods-ATVersionControl_Tests.debug.xcconfig */,
-				77ABC111310A4D116C819347 /* Pods-ATVersionControl_Tests.release.xcconfig */,
+				194EC5BF4BF7B53147E5FC89 /* Pods-ATVersionControl_Example.debug.xcconfig */,
+				2E08C3DA081F0F9D1B0D22CF /* Pods-ATVersionControl_Example.release.xcconfig */,
+				F9EC719EEE05C14E5ADDA84F /* Pods-ATVersionControl_Tests.debug.xcconfig */,
+				6DED581F9C5CF05CDC5FC984 /* Pods-ATVersionControl_Tests.release.xcconfig */,
 			);
 			name = Pods;
 			path = Pods;
@@ -167,11 +167,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "ATVersionControl_Example" */;
 			buildPhases = (
-				4CF1977715CB0067489E6A29 /* [CP] Check Pods Manifest.lock */,
+				0630225CF7906010C946C434 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				25B6670A88B2C29EE47C9E99 /* [CP] Embed Pods Frameworks */,
+				7E10F851F90FC6627D52943F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -186,7 +186,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "ATVersionControl_Tests" */;
 			buildPhases = (
-				BE1E9FFDDD16369906269906 /* [CP] Check Pods Manifest.lock */,
+				4F83499B4C1E20B46A94709E /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
@@ -262,29 +262,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		25B6670A88B2C29EE47C9E99 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ATVersionControl_Example/Pods-ATVersionControl_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ATVersionControl/ATVersionControl.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ATVersionControl.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ATVersionControl_Example/Pods-ATVersionControl_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4CF1977715CB0067489E6A29 /* [CP] Check Pods Manifest.lock */ = {
+		0630225CF7906010C946C434 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -306,7 +284,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BE1E9FFDDD16369906269906 /* [CP] Check Pods Manifest.lock */ = {
+		4F83499B4C1E20B46A94709E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -326,6 +304,32 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7E10F851F90FC6627D52943F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ATVersionControl_Example/Pods-ATVersionControl_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ATVersionControl/ATVersionControl.framework",
+				"${BUILT_PRODUCTS_DIR}/AyanTechNetworkingLibrary/AyanTechNetworkingLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
+				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftBooster/SwiftBooster.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ATVersionControl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AyanTechNetworkingLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftBooster.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ATVersionControl_Example/Pods-ATVersionControl_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -479,7 +483,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FB10190AA13CCBCB798CFC65 /* Pods-ATVersionControl_Example.debug.xcconfig */;
+			baseConfigurationReference = 194EC5BF4BF7B53147E5FC89 /* Pods-ATVersionControl_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ATVersionControl/Info.plist;
@@ -494,7 +498,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55C388EB8E71ECE39C7113CE /* Pods-ATVersionControl_Example.release.xcconfig */;
+			baseConfigurationReference = 2E08C3DA081F0F9D1B0D22CF /* Pods-ATVersionControl_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ATVersionControl/Info.plist;
@@ -509,7 +513,7 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 249D011C51F9F699CC2F4B81 /* Pods-ATVersionControl_Tests.debug.xcconfig */;
+			baseConfigurationReference = F9EC719EEE05C14E5ADDA84F /* Pods-ATVersionControl_Tests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -531,7 +535,7 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 77ABC111310A4D116C819347 /* Pods-ATVersionControl_Tests.release.xcconfig */;
+			baseConfigurationReference = 6DED581F9C5CF05CDC5FC984 /* Pods-ATVersionControl_Tests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

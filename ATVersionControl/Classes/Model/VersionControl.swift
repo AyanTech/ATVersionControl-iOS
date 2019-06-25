@@ -11,6 +11,11 @@ import AyanTechNetworkingLibrary
 import SwiftBooster
 import PopupDialog
 
+public protocol VersionControlDelegate: class {
+    func versionControlCompletedSuccessfully()
+    func versionControlDidFinish(with error: String)
+}
+
 public class VersionControl {
     fileprivate static var instance: VersionControl?
     
@@ -18,6 +23,7 @@ public class VersionControl {
     public var version = ""
     public var categoryName = ""
     public var extraInfo = JSONObject()
+    public weak var delegate: VersionControlDelegate?
     
     private var updateStatus: UpdateStatus = .notRequired
     
@@ -44,25 +50,38 @@ public class VersionControl {
         }
     }
     
-    public func checkVersion() {
+    public func checkVersion(delegate: VersionControlDelegate? = nil) {
+        if delegate != nil {
+            self.delegate = delegate
+        }
         ATRequest.request(url: ATUrl.checkVersion, method: .post)
         .setJsonBody(body: [
-            "ApplicationName":self.applicationName,
-            "ApplicationType": "ios",
-            "CategoryName": self.categoryName,
-            "CurrentApplicationVersion": self.version,
-            "ExtraInfo": self.extraInfo
-        ])
+            "Parameters": [
+                "ApplicationName":self.applicationName,
+                "ApplicationType": "ios",
+                "CategoryName": self.categoryName,
+                "CurrentApplicationVersion": self.version,
+                "ExtraInfo": self.extraInfo
+            ]
+        ], ignoreParameterCreator: true)
         .send(responseHandler: handleCheckVersionResponse(_:))
     }
     
     private func handleCheckVersionResponse(_ response: ATResponse) {
-        if let updateStatus = UpdateStatus(rawValue: getValue(input: response.parametersJsonObject, subscripts: "UpdateStatus") ?? ""), updateStatus != .notRequired {
-            self.getLastVersion() { versionInfo, _ in
-                if let info = versionInfo {
-                    self.showUpdateDialog(updateStatus: updateStatus, versionInfo: info)
+        if response.isSuccess {
+            if let updateStatus = UpdateStatus(rawValue: getValue(input: response.parametersJsonObject, subscripts: "UpdateStatus") ?? ""), updateStatus != .notRequired {
+                self.getLastVersion() { versionInfo, error in
+                    if let info = versionInfo {
+                        self.showUpdateDialog(updateStatus: updateStatus, versionInfo: info)
+                    } else {
+                        self.delegate?.versionControlDidFinish(with: error?.persianDescription ?? "خطا در برقراری ارتباط با سایت")
+                    }
                 }
+            } else {
+                self.delegate?.versionControlCompletedSuccessfully()
             }
+        } else {
+            self.delegate?.versionControlDidFinish(with: response.error?.persianDescription ?? "خطا در برقراری ارتباط با سایت")
         }
     }
     
@@ -102,6 +121,8 @@ public class VersionControl {
         let rejectButton = PopupDialogButton.init(title: versionInfo.rejectButtonText, action: {
             if updateStatus == .mandatory {
                 exit(0)
+            } else {
+                self.delegate?.versionControlCompletedSuccessfully()
             }
         })
         

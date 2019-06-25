@@ -1,6 +1,0 @@
-framework module ATVersionControl {
-  umbrella header "ATVersionControl-umbrella.h"
-
-  export *
-  module * { export * }
-}
