@@ -19,12 +19,12 @@ Library to check for new version of app with AyanTech servers
   s.source           = { :git => 'https://github.com/AyanTech/ATVersionControl-iOS.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/3pehrbehroozi'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
   s.swift_version = "5.0"
   s.source_files = 'ATVersionControl/Classes/**/*'
   
   s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'SwiftBooster'
   s.dependency 'PopupDialog'
-  s.dependency 'AyanTechNetworkingLibrary', '~> 1.6.0'
+  s.dependency 'AyanTechNetworkingLibrary', '~> 1.6.1'
 end
