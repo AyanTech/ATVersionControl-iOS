@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ATVersionControl'
-  s.version          = '0.3.0'
+  s.version          = '0.4.0'
   s.summary          = 'Version control library for AyanTech iOS apps'
   s.description      = <<-DESC
 Library to check for new version of app with AyanTech servers
