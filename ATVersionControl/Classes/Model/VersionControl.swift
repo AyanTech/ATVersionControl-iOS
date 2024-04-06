@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AyanTechNetworkingLibrary-iOS
+import AyanTechNetworkingLibrary
 import SwiftBooster
 import PopupDialog
 
