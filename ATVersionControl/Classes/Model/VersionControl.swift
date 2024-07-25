@@ -132,7 +132,7 @@ public class VersionControl {
         alertController.addAction(acceptAction)
         alertController.addAction(rejectAction)
         
-        if let topViewController = VCUtils.getTopMostViewController() {
+        if let topViewController = Utils.getTopMostViewController() {
             topViewController.present(alertController, animated: true, completion: nil)
         }
     }
