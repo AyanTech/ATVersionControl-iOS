@@ -10,7 +10,7 @@ import Foundation
 
 class ATUrl {
     class var baseUrl: String {
-        return "http://versioncontrol.infra.ayantech.ir/WebServices/App.svc"
+        return "https://versioncontrol.infra.ayantech.ir/WebServices/App.svc"
     }
     
     class var checkVersion: String {
