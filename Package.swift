@@ -20,6 +20,12 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "ATVersionControl", path: "ATVersionControl"),
+            name: "ATVersionControl",
+            dependencies: [
+                .product(name: "AyanTechNetworkingLibrary", package: "AyanTechNetworkingLibrary-iOS"),
+                "SwiftBooster"
+            ],
+            path: "ATVersionControl"
+        ),
     ]
 )
