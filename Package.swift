@@ -4,23 +4,22 @@
 import PackageDescription
 
 let package = Package(
-    name: "ATVersionControl-iOS",
+    name: "ATVersionControl",
     platforms: [
         .iOS(.v10),
     ],
     products: [
         .library(
-            name: "ATVersionControl-iOS",
-            targets: ["ATVersionControl-iOS"]
+            name: "ATVersionControl",
+            targets: ["ATVersionControl"]
         ),
     ],
     dependencies: [
         .package(url: "https://github.com/mohabbasi1213/SwiftBooster.git", .branch("main")),
-        .package(url: "https://github.com/Orderella/PopupDialog.git", .branch("main")),
-        .package(url: "https://github.com/mohabbasi1213/AyanTechNetworkingLibrary-iOS.git", .branch("main")),
+        .package(url: "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS", .branch("main")),
     ],
     targets: [
         .target(
-            name: "ATVersionControl-iOS", path: "ATVersionControl"),
+            name: "ATVersionControl", path: "ATVersionControl"),
     ]
 )
