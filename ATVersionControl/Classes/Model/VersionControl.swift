@@ -6,10 +6,9 @@
 //  Copyright © 2019 ayantech.ir. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import AyanTechNetworkingLibrary
 import SwiftBooster
-import PopupDialog
 
 public protocol VersionControlDelegate: class {
     func versionControlCompletedSuccessfully()
@@ -105,31 +104,36 @@ public class VersionControl {
         }
     }
     
+    
     private func showUpdateDialog(updateStatus: UpdateStatus, versionInfo: VersionInfo) {
         let dialogMessage = versionInfo.body + "\n" + versionInfo.changeLogs.joined(separator: "\n")
-        let dialog = PopupDialog(title: versionInfo.title, message: dialogMessage, tapGestureDismissal: updateStatus == .optional, panGestureDismissal: updateStatus == .optional)
-        let acceptButton = PopupDialogButton.init(title: versionInfo.acceptButtonText, action: {
+        
+        let alertController = UIAlertController(title: versionInfo.title, message: dialogMessage, preferredStyle: .alert)
+        
+        let acceptAction = UIAlertAction(title: versionInfo.acceptButtonText, style: .default) { _ in
             if let url = URL(string: versionInfo.link), UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
                 if updateStatus == .mandatory {
-                    doAfter(2.0) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                         exit(0)
                     }
                 }
             }
-        })
-        let rejectButton = PopupDialogButton.init(title: versionInfo.rejectButtonText, action: {
+        }
+        
+        let rejectAction = UIAlertAction(title: versionInfo.rejectButtonText, style: .destructive) { _ in
             if updateStatus == .mandatory {
                 exit(0)
             } else {
                 self.delegate?.versionControlCompletedSuccessfully()
             }
-        })
+        }
         
-        rejectButton.setTitleColor(UIColor.red, for: .normal)
-        dialog.addButton(acceptButton)
-        dialog.addButton(rejectButton)
-        Utils.getTopMostViewController()?.present(dialog, animated: true)
+        alertController.addAction(acceptAction)
+        alertController.addAction(rejectAction)
         
+        if let topViewController = Utils.getTopMostViewController() {
+            topViewController.present(alertController, animated: true, completion: nil)
+        }
     }
 }
