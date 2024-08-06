@@ -15,8 +15,8 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/sepbehroozi/SwiftBooster.git", .branch("main")),
-        .package(url: "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS", .branch("main")),
+        .package(url: "https://github.com/sepbehroozi/SwiftBooster.git", .branch("master")),
+        .package(url: "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS", .branch("master")),
     ],
     targets: [
         .target(
