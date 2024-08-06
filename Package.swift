@@ -20,7 +20,6 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "ATVersionControl",
-            dependencies: ["AyanTechNetworkingLibrary"]),
+            name: "ATVersionControl", path: "ATVersionControl"),
     ]
 )
