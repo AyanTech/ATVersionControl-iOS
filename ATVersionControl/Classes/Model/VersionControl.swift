@@ -15,7 +15,7 @@ public protocol VersionControlDelegate: class {
     func versionControlDidFinish(with error: String)
 }
 
-public class VersionControl {
+open class VersionControl {
     fileprivate static var instance: VersionControl?
     
     public var applicationName = ""
@@ -33,7 +33,11 @@ public class VersionControl {
         return instance!
     }
     
-    private init() {
+    public static func useShared(_ versionControl: VersionControl) {
+        instance = versionControl
+    }
+    
+    public init() {
         version = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
     }
     
@@ -105,7 +109,7 @@ public class VersionControl {
     }
     
     
-    private func showUpdateDialog(updateStatus: UpdateStatus, versionInfo: VersionInfo) {
+    open func showUpdateDialog(updateStatus: UpdateStatus, versionInfo: VersionInfo) {
         let dialogMessage = versionInfo.body + "\n" + versionInfo.changeLogs.joined(separator: "\n")
         
         let alertController = UIAlertController(title: versionInfo.title, message: dialogMessage, preferredStyle: .alert)

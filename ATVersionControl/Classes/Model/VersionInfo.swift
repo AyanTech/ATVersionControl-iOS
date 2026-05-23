@@ -10,14 +10,14 @@ import Foundation
 import SwiftBooster
 
 public class VersionInfo {
-    var acceptButtonText = ""
-    var body = ""
-    var changeLogs = [String]()
-    var link = ""
-    var linkType = ""
-    var rejectButtonText = ""
-    var textToShare = ""
-    var title = ""
+    public var acceptButtonText = ""
+    public var body = ""
+    public var changeLogs = [String]()
+    public var link = ""
+    public var linkType = ""
+    public var rejectButtonText = ""
+    public var textToShare = ""
+    public var title = ""
     
     class func from(json object: JSONObject?) -> VersionInfo? {
         guard let object = object else {

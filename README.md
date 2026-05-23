@@ -23,6 +23,21 @@ VersionControl.shared.checkVersion()
 ```
 It automatically shows an update dialog if there is one, and handle the actions.
 
+#### Custom update UI (optional)
+
+Call `useShared` once at app launch **before** any `VersionControl.shared` use. Subclass and override `showUpdateDialog` to replace the default alert (e.g. bottom sheet). If you do not call `useShared`, behavior is unchanged.
+
+```swift
+final class AppVersionControl: VersionControl {
+    override func showUpdateDialog(updateStatus: UpdateStatus, versionInfo: VersionInfo) {
+        // Your UI — use versionInfo.title, .body, .link, button texts, etc.
+    }
+}
+
+// e.g. AppDelegate.application(_:didFinishLaunchingWithOptions:)
+VersionControl.useShared(AppVersionControl())
+```
+
 #### Share application
 Just call:
 ```swift
