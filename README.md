@@ -38,6 +38,25 @@ final class AppVersionControl: VersionControl {
 VersionControl.useShared(AppVersionControl())
 ```
 
+#### Endpoint resolution (optional)
+
+Using `getEndpoints` is **arbitrary** — only add it if your app needs colocation discovery.
+
+Call `getEndpoints`, then `checkVersion` yourself — the package does not chain them. If you never call `getEndpoints`, behavior is unchanged: version checks use `defaultVersionControlBaseURL` for `CheckVersion` / `GetLastVersion`.
+
+```swift
+VersionControl.shared.applicationName = "MyAppName"
+VersionControl.shared.getEndpoints { result in
+    switch result {
+    case .success(let endpoints):
+        break // app uses endpoints as needed
+    case .failure:
+        break
+    }
+    VersionControl.shared.checkVersion()
+}
+```
+
 #### Share application
 Just call:
 ```swift

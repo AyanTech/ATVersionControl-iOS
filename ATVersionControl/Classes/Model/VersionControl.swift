@@ -25,6 +25,7 @@ open class VersionControl {
     public weak var delegate: VersionControlDelegate?
     
     private var updateStatus: UpdateStatus = .notRequired
+    private var isResolvingEndpoints = false
     
     public static var shared: VersionControl {
         if instance == nil {
@@ -39,6 +40,20 @@ open class VersionControl {
     
     public init() {
         version = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+    }
+    
+    public func getEndpoints(completion: @escaping (GetEndpointsResult) -> Void) {
+        guard !isResolvingEndpoints else {
+            DispatchQueue.main.async {
+                completion(.failure)
+            }
+            return
+        }
+        isResolvingEndpoints = true
+        ColocationResolver.resolve(applicationName: applicationName, version: version) { [weak self] result in
+            self?.isResolvingEndpoints = false
+            completion(result)
+        }
     }
     
     public func shareAppLink(_ completionHandler: @escaping (ATError?) -> Void) {
@@ -107,7 +122,6 @@ open class VersionControl {
                 }
         }
     }
-    
     
     open func showUpdateDialog(updateStatus: UpdateStatus, versionInfo: VersionInfo) {
         let dialogMessage = versionInfo.body + "\n" + versionInfo.changeLogs.joined(separator: "\n")
