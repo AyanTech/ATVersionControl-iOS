@@ -9,15 +9,24 @@
 import Foundation
 
 class ATUrl {
-    class var baseUrl: String {
-        return "https://versioncontrol.infra.ayantech.ir/WebServices/App.svc"
-    }
-    
+    static let defaultVersionControlBaseURL = "https://versioncontrol.infra.ayantech.ir/WebServices/App.svc/"
+    static let internationalVersionControlBaseURL = "https://versioncontrol.infra.ayanco.com/WebServices/App.svc/"
+
+    static var versionControlBaseURL = defaultVersionControlBaseURL
+
     class var checkVersion: String {
-        return "\(baseUrl)/CheckVersion"
+        return versionControlBaseURL + "CheckVersion"
     }
-    
+
     class var getLastVersion: String {
-        return "\(baseUrl)/GetLastVersion"
+        return versionControlBaseURL + "GetLastVersion"
+    }
+
+    class var iranGetApplicationColocationConfig: String {
+        return defaultVersionControlBaseURL + "GetApplicationColocationConfig"
+    }
+
+    class var internationalGetApplicationColocationConfig: String {
+        return internationalVersionControlBaseURL + "GetApplicationColocationConfig"
     }
 }

@@ -23,6 +23,40 @@ VersionControl.shared.checkVersion()
 ```
 It automatically shows an update dialog if there is one, and handle the actions.
 
+#### Custom update UI (optional)
+
+Call `useShared` once at app launch **before** any `VersionControl.shared` use. Subclass and override `showUpdateDialog` to replace the default alert (e.g. bottom sheet). If you do not call `useShared`, behavior is unchanged.
+
+```swift
+final class AppVersionControl: VersionControl {
+    override func showUpdateDialog(updateStatus: UpdateStatus, versionInfo: VersionInfo) {
+        // Your UI — use versionInfo.title, .body, .link, button texts, etc.
+    }
+}
+
+// e.g. AppDelegate.application(_:didFinishLaunchingWithOptions:)
+VersionControl.useShared(AppVersionControl())
+```
+
+#### Endpoint resolution (optional)
+
+Using `getEndpoints` is **arbitrary** — only add it if your app needs colocation discovery.
+
+Call `getEndpoints`, then `checkVersion` yourself — the package does not chain them. If you never call `getEndpoints`, behavior is unchanged: version checks use `defaultVersionControlBaseURL` for `CheckVersion` / `GetLastVersion`.
+
+```swift
+VersionControl.shared.applicationName = "MyAppName"
+VersionControl.shared.getEndpoints { result in
+    switch result {
+    case .success(let endpoints):
+        break // app uses endpoints as needed
+    case .failure:
+        break
+    }
+    VersionControl.shared.checkVersion()
+}
+```
+
 #### Share application
 Just call:
 ```swift
