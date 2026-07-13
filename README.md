@@ -72,7 +72,3 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'ATVersionControl'
 ```
-
-## Author
-
-Sepehr  Behroozi, 3pehrbehroozi@gmail.com
