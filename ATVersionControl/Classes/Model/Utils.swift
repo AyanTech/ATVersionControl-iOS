@@ -6,7 +6,6 @@
 //  Copyright © 2019 ayantech.ir. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class Utils {
