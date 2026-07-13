@@ -10,7 +10,7 @@ import UIKit
 import AyanTechNetworkingLibrary
 import SwiftBooster
 
-public protocol VersionControlDelegate: class {
+public protocol VersionControlDelegate: AnyObject {
     func versionControlCompletedSuccessfully()
     func versionControlDidFinish(with error: String)
 }
