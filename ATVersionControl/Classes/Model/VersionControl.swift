@@ -69,20 +69,27 @@ open class VersionControl {
     }
     
     public func checkVersion(delegate: VersionControlDelegate? = nil) {
-        if delegate != nil {
+        if let delegate {
             self.delegate = delegate
         }
+
         ATRequest.request(url: ATUrl.checkVersion, method: .post)
-        .setJsonBody(body: [
-            "Parameters": [
-                "ApplicationName":self.applicationName,
-                "ApplicationType": "ios",
-                "CategoryName": self.categoryName,
-                "CurrentApplicationVersion": self.version,
-                "ExtraInfo": self.extraInfo
-            ]
-        ], ignoreParameterCreator: true)
-        .send(responseHandler: handleCheckVersionResponse(_:))
+            .setJsonBody(
+                body: [
+                    "Parameters": [
+                        "ApplicationName": applicationName,
+                        "ApplicationType": "ios",
+                        "CategoryName": categoryName,
+                        "CurrentApplicationVersion": version,
+                        "ExtraInfo": extraInfo
+                    ]
+                ],
+                ignoreParameterCreator: true
+            )
+            .send { [weak self] response in
+                guard let self else { return }
+                self.handleCheckVersionResponse(response)
+            }
     }
     
     private func handleCheckVersionResponse(_ response: ATResponse) {
