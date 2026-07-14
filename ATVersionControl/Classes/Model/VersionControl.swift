@@ -99,14 +99,14 @@ open class VersionControl {
                     if let info = versionInfo {
                         self.showUpdateDialog(updateStatus: updateStatus, versionInfo: info)
                     } else {
-                        self.delegate?.versionControlDidFinish(with: error?.persianDescription ?? "خطا در برقراری ارتباط با سایت")
+                        self.delegate?.versionControlDidFinish(with: error?.persianDescription ?? "خطا در برقراری ارتباط با سرور")
                     }
                 }
             } else {
                 self.delegate?.versionControlCompletedSuccessfully()
             }
         } else {
-            self.delegate?.versionControlDidFinish(with: response.error?.persianDescription ?? "خطا در برقراری ارتباط با سایت")
+            self.delegate?.versionControlDidFinish(with: response.error?.persianDescription ?? "خطا در برقراری ارتباط با سرور")
         }
     }
     
