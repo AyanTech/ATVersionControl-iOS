@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "ATVersionControl",
     platforms: [
-        .iOS(.v10),
+        .iOS(.v12),
     ],
     products: [
         .library(
@@ -15,8 +15,8 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/sepbehroozi/SwiftBooster.git", .branch("master")),
-        .package(url: "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS", .branch("master")),
+        .package(url: "https://github.com/AyanTech/SwiftBooster", .branch("master")),
+        .package(url: "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS", .upToNextMajor(from: "1.8.0")),
     ],
     targets: [
         .target(
