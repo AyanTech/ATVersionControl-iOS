@@ -24,6 +24,5 @@ Library to check for new version of app with AyanTech servers
   s.source_files = 'ATVersionControl/Classes/**/*'
   
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'PopupDialog'
   s.dependency 'AyanTechNetworkingLibrary', '~> 2.0'
 end
