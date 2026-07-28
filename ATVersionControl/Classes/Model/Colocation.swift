@@ -12,10 +12,15 @@ import AyanTechNetworkingLibrary
 /// - Cache only affects try order on the next call; each resolve still performs network requests.
 /// - On success: sets ATUrl.versionControlBaseURL from the VersionControl endpoint (or default), caches lane type.
 /// - On failure (both lanes): resets versionControlBaseURL to default and completes with `.failure`.
+@MainActor
 enum ColocationResolver {
     private static let cacheKey = "ATVersionControl.cache.colocationType"
 
-    static func resolve(applicationName: String, version: String, completion: @escaping (GetEndpointsResult) -> Void) {
+    static func resolve(
+        applicationName: String,
+        version: String,
+        completion: @MainActor @escaping (GetEndpointsResult) -> Void
+    ) {
         tryLanes(lanesInTryOrder(), applicationName: applicationName, version: version, completion: completion)
     }
 
@@ -32,7 +37,7 @@ enum ColocationResolver {
         _ lanes: [ColocationLane],
         applicationName: String,
         version: String,
-        completion: @escaping (GetEndpointsResult) -> Void
+        completion: @MainActor @escaping (GetEndpointsResult) -> Void
     ) {
         guard let lane = lanes.first else {
             ATUrl.versionControlBaseURL = ATUrl.defaultVersionControlBaseURL
@@ -59,7 +64,7 @@ enum ColocationResolver {
         lane: ColocationLane,
         applicationName: String,
         version: String,
-        completion: @escaping (ColocationInfo?) -> Void
+        completion: @MainActor @escaping (ColocationInfo?) -> Void
     ) {
         let url: String
         switch lane {
@@ -79,11 +84,15 @@ enum ColocationResolver {
                 ]
             ], ignoreParameterCreator: true)
             .send { response in
-                completion(ColocationInfo.from(response: response))
-            }
+                MainActor.assumeIsolated {
+                    completion(ColocationInfo.from(response: response))
+                }            }
     }
 
-    private static func finish(_ result: GetEndpointsResult, completion: @escaping (GetEndpointsResult) -> Void) {
+    private static func finish(
+        _ result: GetEndpointsResult,
+        completion: @MainActor @escaping (GetEndpointsResult) -> Void
+    ) {
         DispatchQueue.main.async {
             completion(result)
         }

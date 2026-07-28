@@ -15,6 +15,7 @@ public protocol VersionControlDelegate: AnyObject {
     func versionControlDidFinish(with error: String)
 }
 
+@MainActor
 open class VersionControl {
     fileprivate static var instance: VersionControl?
     
@@ -87,8 +88,10 @@ open class VersionControl {
                 ignoreParameterCreator: true
             )
             .send { [weak self] response in
-                guard let self else { return }
-                self.handleCheckVersionResponse(response)
+                MainActor.assumeIsolated {
+                    guard let self else { return }
+                    self.handleCheckVersionResponse(response)
+                }
             }
     }
     
@@ -110,7 +113,9 @@ open class VersionControl {
         }
     }
     
-    private func getLastVersion(_ completionHandler: ((VersionInfo?, ATError?) -> Void)? = nil) {
+    private func getLastVersion(
+        _ completionHandler: (@MainActor (VersionInfo?, ATError?) -> Void)? = nil
+    ) {
         ATRequest.request(url: ATUrl.getLastVersion, method: .post)
         .setJsonBody(body: [
             "Parameters": [
@@ -121,11 +126,13 @@ open class VersionControl {
                 "ExtraInfo": self.extraInfo
             ]
         ], ignoreParameterCreator: true)
-            .send { (response) in
-                if let versionInfo = VersionInfo.from(json: response.parametersJsonObject) {
-                    completionHandler?(versionInfo, nil)
-                } else {
-                    completionHandler?(nil, response.error ?? .generalError)
+            .send { response in
+                MainActor.assumeIsolated {
+                    if let versionInfo = VersionInfo.from(json: response.parametersJsonObject) {
+                        completionHandler?(versionInfo, nil)
+                    } else {
+                        completionHandler?(nil, response.error ?? .generalError)
+                    }
                 }
         }
     }

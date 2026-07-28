@@ -8,6 +8,7 @@
 
 import UIKit
 
+@MainActor
 class Utils {
     class func getTopMostViewController() -> UIViewController? {
         var topController = UIApplication.shared.keyWindow?.rootViewController
