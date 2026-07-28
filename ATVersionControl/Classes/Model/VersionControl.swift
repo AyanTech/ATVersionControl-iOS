@@ -8,7 +8,6 @@
 
 import UIKit
 import AyanTechNetworkingLibrary
-import SwiftBooster
 
 public protocol VersionControlDelegate: AnyObject {
     func versionControlCompletedSuccessfully()
@@ -22,7 +21,7 @@ open class VersionControl {
     public var applicationName = ""
     public var version = ""
     public var categoryName = ""
-    public var extraInfo = JSONObject()
+    public var extraInfo: [String: Any] = [:]
     public weak var delegate: VersionControlDelegate?
     
     private var updateStatus: UpdateStatus = .notRequired
@@ -97,7 +96,9 @@ open class VersionControl {
     
     private func handleCheckVersionResponse(_ response: ATResponse) {
         if response.isSuccess {
-            if let updateStatus = UpdateStatus(rawValue: getValue(input: response.parametersJsonObject, subscripts: "UpdateStatus") ?? ""), updateStatus != .notRequired {
+            if let updateStatusValue = response.parametersJsonObject?["UpdateStatus"] as? String,
+               let updateStatus = UpdateStatus(rawValue: updateStatusValue),
+               updateStatus != .notRequired {
                 self.getLastVersion() { versionInfo, error in
                     if let info = versionInfo {
                         self.showUpdateDialog(updateStatus: updateStatus, versionInfo: info)

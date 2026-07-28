@@ -4,7 +4,6 @@
 //
 
 import AyanTechNetworkingLibrary
-import SwiftBooster
 
 class ColocationInfo {
     static let versionControlEndpointName = "VersionControl"
@@ -18,7 +17,7 @@ class ColocationInfo {
 
         let result = ColocationInfo()
 
-        if let objects: [JSONObject] = getValue(input: parameters, subscripts: "EndpointList") {
+        if let objects = parameters["EndpointList"] as? [[String: Any]] {
             result.endpoints = objects.compactMap { ColocationEndpoint.from(json: $0) }
         }
 
