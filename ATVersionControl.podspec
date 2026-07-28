@@ -26,5 +26,5 @@ Library to check for new version of app with AyanTech servers
   s.frameworks = 'UIKit', 'Foundation'
   s.dependency 'SwiftBooster'
   s.dependency 'PopupDialog'
-  s.dependency 'AyanTechNetworkingLibrary'
+  s.dependency 'AyanTechNetworkingLibrary', '~> 2.0'
 end
