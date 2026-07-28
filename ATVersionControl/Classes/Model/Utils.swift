@@ -11,7 +11,12 @@ import UIKit
 @MainActor
 class Utils {
     class func getTopMostViewController() -> UIViewController? {
-        var topController = UIApplication.shared.keyWindow?.rootViewController
+        var topController = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first(where: { $0.activationState == .foregroundActive })?
+            .windows
+            .first(where: \.isKeyWindow)?
+            .rootViewController
         
         while topController?.presentedViewController != nil {
             topController = topController?.presentedViewController
