@@ -5,64 +5,145 @@
 
 <span style="color:red;">*</span> *app should be registered in AyanTechServers*
 
+## Requirements
+
+- iOS 13.0+
+- Swift 6.0+
+- Xcode 16.0+
+- AyanTechNetworkingLibrary 2.x
+
 ## Usage
 
-#### Version control
+### Configuration
 
-To configure the parameters use this:
 ```swift
 VersionControl.shared.applicationName = "MyAppName"
 VersionControl.shared.categoryName = "cat"
-VersionControl.shared.version = "1.0.0" //default version is CFBundleShortVersionString
-VersionControl.shared.extraInfo["Token"] = "Test" //Json object and optional
+VersionControl.shared.version = "1.0.0" // Defaults to CFBundleShortVersionString
+VersionControl.shared.extraInfo["Token"] = "Test"
 ```
 
-And to check the latest version wherever you like just call:
+### Combine
+
+Resolve the app endpoints first, then check its version. Keep each subscription alive until it completes:
+
 ```swift
-VersionControl.shared.checkVersion()
+import Combine
+
+@MainActor
+final class VersionControlFlow {
+    private let versionControl = VersionControl.shared
+    private var endpointsCancellable: AnyCancellable?
+    private var versionCheckCancellable: AnyCancellable?
+
+    func start() {
+        resolveEndpoints()
+    }
+
+    private func resolveEndpoints() {
+        endpointsCancellable?.cancel()
+
+        endpointsCancellable = versionControl.getEndpointsPublisher()
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    if case .failure(let error) = completion {
+                        // Apply the app's default endpoint configuration.
+                        print(error.message)
+                    }
+                    self?.checkVersion()
+                },
+                receiveValue: { endpoints in
+                    // Apply the resolved endpoints to the app's services.
+                    print(endpoints)
+                }
+            )
+    }
+
+    func checkVersion() {
+        versionCheckCancellable?.cancel()
+
+        versionCheckCancellable = versionControl.checkVersionPublisher()
+            .sink(
+                receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        // Show an error or continue according to app requirements.
+                        print(error.message)
+                    }
+                },
+                receiveValue: { status in
+                    switch status {
+                    case .notRequired:
+                        // Navigate to the app.
+                        break
+                    case .optional, .mandatory:
+                        // The package presents the update dialog automatically.
+                        break
+                    }
+                }
+            )
+    }
+}
 ```
-It automatically shows an update dialog if there is one, and handle the actions.
 
-#### Custom update UI (optional)
+Endpoint resolution is optional. If the app does not use colocation discovery, call `checkVersion()` directly.
 
-Call `useShared` once at app launch **before** any `VersionControl.shared` use. Subclass and override `showUpdateDialog` to replace the default alert (e.g. bottom sheet). If you do not call `useShared`, behavior is unchanged.
+`checkVersionPublisher()` completes after presenting an optional or mandatory update dialog; it does not wait for the user's decision. Set `VersionControl.shared.delegate` to handle the current optional-update "Later" action.
+
+### Latest version information
+
+```swift
+versionControl.getLastVersionPublisher()
+    .sink(
+        receiveCompletion: { print($0) },
+        receiveValue: { versionInfo in
+            print(versionInfo.title)
+        }
+    )
+    .store(in: &cancellables)
+```
+
+### Share application
+
+```swift
+versionControl.shareAppLinkPublisher()
+    .sink(
+        receiveCompletion: { print($0) },
+        receiveValue: { _ in }
+    )
+    .store(in: &cancellables)
+```
+
+`shareAppLinkPublisher()` automatically presents `UIActivityViewController`.
+
+### Custom update UI (optional)
+
+Call `useShared` once at app launch, before accessing `VersionControl.shared`. Override `showUpdateDialog` to replace the default alert.
 
 ```swift
 final class AppVersionControl: VersionControl {
     override func showUpdateDialog(updateStatus: UpdateStatus, versionInfo: VersionInfo) {
-        // Your UI — use versionInfo.title, .body, .link, button texts, etc.
+        // Present custom update UI.
     }
 }
 
-// e.g. AppDelegate.application(_:didFinishLaunchingWithOptions:)
 VersionControl.useShared(AppVersionControl())
 ```
 
-#### Endpoint resolution (optional)
+### Legacy compatibility
 
-Using `getEndpoints` is **arbitrary** — only add it if your app needs colocation discovery.
-
-Call `getEndpoints`, then `checkVersion` yourself — the package does not chain them. If you never call `getEndpoints`, behavior is unchanged: version checks use `defaultVersionControlBaseURL` for `CheckVersion` / `GetLastVersion`.
+The callback APIs remain temporarily available for backward compatibility:
 
 ```swift
-VersionControl.shared.applicationName = "MyAppName"
+VersionControl.shared.checkVersion()
+
 VersionControl.shared.getEndpoints { result in
-    switch result {
-    case .success(let endpoints):
-        break // app uses endpoints as needed
-    case .failure:
-        break
-    }
-    VersionControl.shared.checkVersion()
+    print(result)
+}
+
+VersionControl.shared.shareAppLink { error in
+    print(error as Any)
 }
 ```
-
-#### Share application
-Just call:
-```swift
-VersionControl.shared.shareAppLink() 
-```
-It automatically shows the `UIActivityViewController` for sharing app link or text.
 
 ## Installation
 
