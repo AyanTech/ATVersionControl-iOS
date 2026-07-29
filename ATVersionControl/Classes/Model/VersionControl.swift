@@ -21,7 +21,7 @@ open class VersionControl {
     public var applicationName = ""
     public var version = ""
     public var categoryName = ""
-    public var extraInfo: [String: Any] = [:]
+    public var extraInfo: [String: String] = [:]
     public weak var delegate: VersionControlDelegate?
     
     private var updateStatus: UpdateStatus = .notRequired

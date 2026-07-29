@@ -4,16 +4,21 @@
 //
 //  Created by Amir on 7/13/26.
 //
-public class ColocationEndpoint {
+public struct ColocationEndpoint: Decodable, Sendable {
     public var name = ""
     public var baseURL = ""
 
-    class func from(json object: [String: Any]?) -> ColocationEndpoint? {
+    enum CodingKeys: String, CodingKey {
+        case name = "Name"
+        case baseURL = "BaseUrl"
+    }
+
+    static func from(json object: [String: Any]?) -> ColocationEndpoint? {
         guard let object = object else {
             return nil
         }
 
-        let result = ColocationEndpoint()
+        var result = ColocationEndpoint()
         result.name = object["Name"] as? String ?? ""
         result.baseURL = object["BaseUrl"] as? String ?? ""
 

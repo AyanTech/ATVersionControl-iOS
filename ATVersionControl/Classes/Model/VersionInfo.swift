@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class VersionInfo {
+public struct VersionInfo: Decodable, Sendable {
     public var acceptButtonText = ""
     public var body = ""
     public var changeLogs = [String]()
@@ -17,13 +17,24 @@ public class VersionInfo {
     public var rejectButtonText = ""
     public var textToShare = ""
     public var title = ""
-    
-    class func from(json object: [String: Any]?) -> VersionInfo? {
+
+    enum CodingKeys: String, CodingKey {
+        case acceptButtonText = "AcceptButtonText"
+        case body = "Body"
+        case changeLogs = "ChangeLogs"
+        case link = "Link"
+        case linkType = "LinkType"
+        case rejectButtonText = "RejectButtonText"
+        case textToShare = "TextToShare"
+        case title = "Title"
+    }
+
+    static func from(json object: [String: Any]?) -> VersionInfo? {
         guard let object = object else {
             return nil
         }
         
-        let result = VersionInfo()
+        var result = VersionInfo()
         result.acceptButtonText = object["AcceptButtonText"] as? String ?? ""
         result.body = object["Body"] as? String ?? ""
         result.changeLogs = object["ChangeLogs"] as? [String] ?? []
