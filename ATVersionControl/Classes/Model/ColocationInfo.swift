@@ -4,21 +4,24 @@
 //
 
 import AyanTechNetworkingLibrary
-import SwiftBooster
 
-class ColocationInfo {
+struct ColocationInfo: Decodable, Sendable {
     static let versionControlEndpointName = "VersionControl"
 
     var endpoints = [ColocationEndpoint]()
 
-    class func from(response: ATResponse) -> ColocationInfo? {
+    enum CodingKeys: String, CodingKey {
+        case endpoints = "EndpointList"
+    }
+
+    static func from(response: ATResponse) -> ColocationInfo? {
         guard response.isSuccess, let parameters = response.parametersJsonObject else {
             return nil
         }
 
-        let result = ColocationInfo()
+        var result = ColocationInfo()
 
-        if let objects: [JSONObject] = getValue(input: parameters, subscripts: "EndpointList") {
+        if let objects = parameters["EndpointList"] as? [[String: Any]] {
             result.endpoints = objects.compactMap { ColocationEndpoint.from(json: $0) }
         }
 

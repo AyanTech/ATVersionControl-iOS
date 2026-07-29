@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum UpdateStatus: String {
+public enum UpdateStatus: String, Decodable, Sendable {
     case notRequired = "NotRequired"
     case optional = "Optional"
     case mandatory = "Mandatory"

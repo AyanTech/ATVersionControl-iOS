@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import SwiftBooster
 
-public class VersionInfo {
+public struct VersionInfo: Decodable, Sendable {
     public var acceptButtonText = ""
     public var body = ""
     public var changeLogs = [String]()
@@ -18,21 +17,32 @@ public class VersionInfo {
     public var rejectButtonText = ""
     public var textToShare = ""
     public var title = ""
-    
-    class func from(json object: JSONObject?) -> VersionInfo? {
+
+    enum CodingKeys: String, CodingKey {
+        case acceptButtonText = "AcceptButtonText"
+        case body = "Body"
+        case changeLogs = "ChangeLogs"
+        case link = "Link"
+        case linkType = "LinkType"
+        case rejectButtonText = "RejectButtonText"
+        case textToShare = "TextToShare"
+        case title = "Title"
+    }
+
+    static func from(json object: [String: Any]?) -> VersionInfo? {
         guard let object = object else {
             return nil
         }
         
-        let result = VersionInfo()
-        result.acceptButtonText = getValue(input: object, subscripts: "AcceptButtonText") ?? ""
-        result.body = getValue(input: object, subscripts: "Body") ?? ""
-        result.changeLogs = getValue(input: object, subscripts: "ChangeLogs") ?? []
-        result.link = getValue(input: object, subscripts: "Link") ?? ""
-        result.linkType = getValue(input: object, subscripts: "LinkType") ?? ""
-        result.rejectButtonText = getValue(input: object, subscripts: "RejectButtonText") ?? ""
-        result.textToShare = getValue(input: object, subscripts: "TextToShare") ?? ""
-        result.title = getValue(input: object, subscripts: "Title") ?? ""
+        var result = VersionInfo()
+        result.acceptButtonText = object["AcceptButtonText"] as? String ?? ""
+        result.body = object["Body"] as? String ?? ""
+        result.changeLogs = object["ChangeLogs"] as? [String] ?? []
+        result.link = object["Link"] as? String ?? ""
+        result.linkType = object["LinkType"] as? String ?? ""
+        result.rejectButtonText = object["RejectButtonText"] as? String ?? ""
+        result.textToShare = object["TextToShare"] as? String ?? ""
+        result.title = object["Title"] as? String ?? ""
         return result
     }
 }

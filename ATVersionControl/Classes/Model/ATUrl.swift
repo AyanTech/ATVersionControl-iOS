@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class ATUrl {
     static let defaultVersionControlBaseURL = "https://versioncontrol.infra.ayantech.ir/WebServices/App.svc/"
     static let internationalVersionControlBaseURL = "https://versioncontrol.infra.ayanco.com/WebServices/App.svc/"

@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "ATVersionControl",
     platforms: [
-        .iOS(.v12),
+        .iOS(.v13),
     ],
     products: [
         .library(
@@ -15,15 +15,13 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/AyanTech/SwiftBooster", .branch("master")),
-        .package(url: "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS", .upToNextMajor(from: "1.8.0")),
+        .package(url: "https://github.com/AyanTech/AyanTechNetworkingLibrary-iOS", .upToNextMajor(from: "2.0.0")),
     ],
     targets: [
         .target(
             name: "ATVersionControl",
             dependencies: [
-                .product(name: "AyanTechNetworkingLibrary", package: "AyanTechNetworkingLibrary-iOS"),
-                "SwiftBooster"
+                .product(name: "AyanTechNetworkingLibrary", package: "AyanTechNetworkingLibrary-iOS")
             ],
             path: "ATVersionControl"
         ),

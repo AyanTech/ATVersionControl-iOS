@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ATVersionControl'
-  s.version          = '0.6.0'
+  s.version          = '0.7.0'
   s.summary          = 'Version control library for AyanTech iOS apps'
   s.description      = <<-DESC
 Library to check for new version of app with AyanTech servers
@@ -19,12 +19,10 @@ Library to check for new version of app with AyanTech servers
   s.source           = { :git => 'https://github.com/AyanTech/ATVersionControl-iOS.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/3pehrbehroozi'
 
-  s.ios.deployment_target = '11.0'
-  s.swift_version = "5.0"
+  s.ios.deployment_target = '13.0'
+  s.swift_version = "6.0"
   s.source_files = 'ATVersionControl/Classes/**/*'
   
   s.frameworks = 'UIKit', 'Foundation'
-  s.dependency 'SwiftBooster'
-  s.dependency 'PopupDialog'
-  s.dependency 'AyanTechNetworkingLibrary'
+  s.dependency 'AyanTechNetworkingLibrary', '~> 2.0'
 end

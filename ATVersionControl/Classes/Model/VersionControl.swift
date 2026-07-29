@@ -8,20 +8,22 @@
 
 import UIKit
 import AyanTechNetworkingLibrary
-import SwiftBooster
 
+@MainActor
 public protocol VersionControlDelegate: AnyObject {
     func versionControlCompletedSuccessfully()
     func versionControlDidFinish(with error: String)
 }
 
+@MainActor
 open class VersionControl {
     fileprivate static var instance: VersionControl?
     
     public var applicationName = ""
     public var version = ""
     public var categoryName = ""
-    public var extraInfo = JSONObject()
+    public var extraInfo: [String: String] = [:]
+    public var networkingConfiguration: ConfigurationV2 = .init(timeout: 30)
     public weak var delegate: VersionControlDelegate?
     
     private var updateStatus: UpdateStatus = .notRequired
@@ -87,14 +89,18 @@ open class VersionControl {
                 ignoreParameterCreator: true
             )
             .send { [weak self] response in
-                guard let self else { return }
-                self.handleCheckVersionResponse(response)
+                MainActor.assumeIsolated {
+                    guard let self else { return }
+                    self.handleCheckVersionResponse(response)
+                }
             }
     }
     
     private func handleCheckVersionResponse(_ response: ATResponse) {
         if response.isSuccess {
-            if let updateStatus = UpdateStatus(rawValue: getValue(input: response.parametersJsonObject, subscripts: "UpdateStatus") ?? ""), updateStatus != .notRequired {
+            if let updateStatusValue = response.parametersJsonObject?["UpdateStatus"] as? String,
+               let updateStatus = UpdateStatus(rawValue: updateStatusValue),
+               updateStatus != .notRequired {
                 self.getLastVersion() { versionInfo, error in
                     if let info = versionInfo {
                         self.showUpdateDialog(updateStatus: updateStatus, versionInfo: info)
@@ -110,7 +116,9 @@ open class VersionControl {
         }
     }
     
-    private func getLastVersion(_ completionHandler: ((VersionInfo?, ATError?) -> Void)? = nil) {
+    private func getLastVersion(
+        _ completionHandler: (@MainActor (VersionInfo?, ATError?) -> Void)? = nil
+    ) {
         ATRequest.request(url: ATUrl.getLastVersion, method: .post)
         .setJsonBody(body: [
             "Parameters": [
@@ -121,11 +129,13 @@ open class VersionControl {
                 "ExtraInfo": self.extraInfo
             ]
         ], ignoreParameterCreator: true)
-            .send { (response) in
-                if let versionInfo = VersionInfo.from(json: response.parametersJsonObject) {
-                    completionHandler?(versionInfo, nil)
-                } else {
-                    completionHandler?(nil, response.error ?? .generalError)
+            .send { response in
+                MainActor.assumeIsolated {
+                    if let versionInfo = VersionInfo.from(json: response.parametersJsonObject) {
+                        completionHandler?(versionInfo, nil)
+                    } else {
+                        completionHandler?(nil, response.error ?? .generalError)
+                    }
                 }
         }
     }

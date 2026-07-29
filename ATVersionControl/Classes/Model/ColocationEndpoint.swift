@@ -4,20 +4,23 @@
 //
 //  Created by Amir on 7/13/26.
 //
-import SwiftBooster
-
-public class ColocationEndpoint {
+public struct ColocationEndpoint: Decodable, Sendable {
     public var name = ""
     public var baseURL = ""
 
-    class func from(json object: JSONObject?) -> ColocationEndpoint? {
+    enum CodingKeys: String, CodingKey {
+        case name = "Name"
+        case baseURL = "BaseUrl"
+    }
+
+    static func from(json object: [String: Any]?) -> ColocationEndpoint? {
         guard let object = object else {
             return nil
         }
 
-        let result = ColocationEndpoint()
-        result.name = getValue(input: object, subscripts: "Name") ?? ""
-        result.baseURL = getValue(input: object, subscripts: "BaseUrl") ?? ""
+        var result = ColocationEndpoint()
+        result.name = object["Name"] as? String ?? ""
+        result.baseURL = object["BaseUrl"] as? String ?? ""
 
         guard !result.name.isEmpty, !result.baseURL.isEmpty else {
             return nil
