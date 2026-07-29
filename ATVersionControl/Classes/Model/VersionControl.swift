@@ -22,6 +22,7 @@ open class VersionControl {
     public var version = ""
     public var categoryName = ""
     public var extraInfo: [String: String] = [:]
+    public var networkingConfiguration: ConfigurationV2 = .init(timeout: 30)
     public weak var delegate: VersionControlDelegate?
     
     private var updateStatus: UpdateStatus = .notRequired

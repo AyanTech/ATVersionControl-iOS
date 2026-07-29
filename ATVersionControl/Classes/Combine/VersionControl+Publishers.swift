@@ -91,7 +91,8 @@ public extension VersionControl {
             urls: VersionClient.URLs(
                 checkVersion: ATUrl.checkVersion,
                 getLastVersion: ATUrl.getLastVersion
-            )
+            ),
+            configuration: networkingConfiguration
         )
     }
 
@@ -100,7 +101,8 @@ public extension VersionControl {
             urls: ColocationClient.URLs(
                 iran: ATUrl.iranGetApplicationColocationConfig,
                 international: ATUrl.internationalGetApplicationColocationConfig
-            )
+            ),
+            configuration: networkingConfiguration
         )
     }
 }
