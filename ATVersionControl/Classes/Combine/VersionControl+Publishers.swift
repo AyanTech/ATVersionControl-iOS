@@ -70,7 +70,16 @@ public extension VersionControl {
             .handleEvents(receiveOutput: { textToShare in
                 MainActor.assumeIsolated {
                     let activity = UIActivityViewController(activityItems: [textToShare], applicationActivities: nil)
-                    Utils.getTopMostViewController()?.present(activity, animated: true)
+                    guard let viewController = Utils.getTopMostViewController() else { return }
+                    activity.popoverPresentationController?.sourceView = viewController.view
+                    activity.popoverPresentationController?.sourceRect = CGRect(
+                        x: viewController.view.bounds.midX,
+                        y: viewController.view.bounds.midY,
+                        width: 0,
+                        height: 0
+                    )
+                    activity.popoverPresentationController?.permittedArrowDirections = []
+                    viewController.present(activity, animated: true)
                 }
             })
             .map { _ in () }
