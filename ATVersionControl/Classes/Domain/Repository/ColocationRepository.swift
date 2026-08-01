@@ -9,6 +9,7 @@ import Combine
 protocol ColocationRepository {
     func getEndpoints(
         applicationName: String,
-        version: String
+        version: String,
+        lane: ColocationLane
     ) -> AnyPublisher<[ColocationEndpoint], ATErrorV2>
 }

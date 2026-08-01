@@ -38,7 +38,8 @@ public extension VersionControl {
 
     func getEndpointsPublisher() -> AnyPublisher<[ColocationEndpoint], ATErrorV2> {
         let useCase = GetEndpointsUseCase(
-            repository: buildColocationRepository()
+            repository: buildColocationRepository(),
+            laneStore: ColocationLaneStore()
         )
 
         return useCase.execute(

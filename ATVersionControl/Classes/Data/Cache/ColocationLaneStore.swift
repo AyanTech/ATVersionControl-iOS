@@ -5,11 +5,6 @@
 
 import Foundation
 
-protocol ColocationLaneStoring {
-    func load() -> ColocationLane?
-    func save(_ lane: ColocationLane)
-}
-
 struct ColocationLaneStore: ColocationLaneStoring {
     private static let cacheKey = "ATVersionControl.cache.colocationType"
 
