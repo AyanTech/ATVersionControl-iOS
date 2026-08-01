@@ -1,26 +1,24 @@
 //
-//  Utils.swift
+//  TopViewControllerProvider.swift
 //  ATVersionControl
-//
-//  Created by Sepehr Behroozi on 5/6/19.
-//  Copyright © 2019 ayantech.ir. All rights reserved.
 //
 
 import UIKit
 
 @MainActor
-class Utils {
-    class func getTopMostViewController() -> UIViewController? {
+enum TopViewControllerProvider {
+    static func topViewController() -> UIViewController? {
         var topController = UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .first(where: { $0.activationState == .foregroundActive })?
             .windows
             .first(where: \.isKeyWindow)?
             .rootViewController
-        
-        while topController?.presentedViewController != nil {
-            topController = topController?.presentedViewController
+
+        while let presentedViewController = topController?.presentedViewController {
+            topController = presentedViewController
         }
+
         return topController
     }
 }
