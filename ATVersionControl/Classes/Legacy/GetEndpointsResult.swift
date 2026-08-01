@@ -1,8 +1,6 @@
 //
-//  GetEndpointsResultEnum.swift
+//  GetEndpointsResult.swift
 //  ATVersionControl
-//
-//  Created by Amir on 7/13/26.
 //
 
 public enum GetEndpointsResult {

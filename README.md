@@ -14,6 +14,8 @@
 
 ## Usage
 
+Use Combine for new integrations. Callback APIs remain available only for backward compatibility. There is no configuration switch: the method being called selects the implementation. Avoid mixing both API styles in the same flow.
+
 ### Configuration
 
 ```swift
@@ -134,10 +136,9 @@ VersionControl.useShared(AppVersionControl())
 The callback APIs remain temporarily available for backward compatibility:
 
 ```swift
-VersionControl.shared.checkVersion()
-
 VersionControl.shared.getEndpoints { result in
     print(result)
+    VersionControl.shared.checkVersion()
 }
 
 VersionControl.shared.shareAppLink { error in
