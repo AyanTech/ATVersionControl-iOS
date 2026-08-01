@@ -3,6 +3,7 @@
 //  ATVersionControl
 //
 
+import AyanTechNetworkingLibrary
 import Combine
 
 struct GetLastVersionUseCase {
@@ -14,7 +15,7 @@ struct GetLastVersionUseCase {
 
     func execute(
         _ input: VersionCheckInput
-    ) -> AnyPublisher<VersionInfo, Error> {
+    ) -> AnyPublisher<VersionInfo, ATErrorV2> {
         repository.getLastVersion(for: input)
     }
 }

@@ -12,7 +12,6 @@ public extension VersionControl {
         let useCase = CheckVersionUseCase(repository: buildVersionRepository())
 
         return useCase.execute(buildVersionCheckInput())
-            .mapError(ATErrorV2.from)
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] result in
                 guard let versionInfo = result.versionInfo else {
@@ -34,7 +33,6 @@ public extension VersionControl {
         let useCase = GetLastVersionUseCase(repository: buildVersionRepository())
 
         return useCase.execute(buildVersionCheckInput())
-            .mapError(ATErrorV2.from)
             .eraseToAnyPublisher()
     }
 
@@ -47,7 +45,6 @@ public extension VersionControl {
             applicationName: applicationName,
             version: version
         )
-        .mapError(ATErrorV2.from)
         .receive(on: DispatchQueue.main)
         .handleEvents(
             receiveOutput: { endpoints in

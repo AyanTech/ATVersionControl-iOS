@@ -15,23 +15,26 @@ struct VersionRepositoryImpl: VersionRepository {
 
     func checkVersion(
         for input: VersionCheckInput
-    ) -> AnyPublisher<UpdateStatus, Error> {
+    ) -> AnyPublisher<UpdateStatus, ATErrorV2> {
         remoteSource.checkVersion(request: VersionRequestDTO(input: input))
-            .tryMap { response in
+            .flatMap { response -> AnyPublisher<UpdateStatus, ATErrorV2> in
                 guard let status = response.updateStatus else {
-                    throw ATErrorV2(errorType: .serialization)
+                    return Fail(error: ATErrorV2(errorType: .serialization))
+                        .eraseToAnyPublisher()
                 }
-                return status
+
+                return Just(status)
+                    .setFailureType(to: ATErrorV2.self)
+                    .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
     }
 
     func getLastVersion(
         for input: VersionCheckInput
-    ) -> AnyPublisher<VersionInfo, Error> {
+    ) -> AnyPublisher<VersionInfo, ATErrorV2> {
         remoteSource.getLastVersion(request: VersionRequestDTO(input: input))
             .map(VersionInfoMapper.map)
-            .mapError { $0 as Error }
             .eraseToAnyPublisher()
     }
 }

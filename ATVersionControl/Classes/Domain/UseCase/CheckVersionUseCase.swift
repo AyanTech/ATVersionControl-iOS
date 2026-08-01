@@ -3,6 +3,7 @@
 //  ATVersionControl
 //
 
+import AyanTechNetworkingLibrary
 import Combine
 
 struct CheckVersionUseCase {
@@ -14,9 +15,9 @@ struct CheckVersionUseCase {
 
     func execute(
         _ input: VersionCheckInput
-    ) -> AnyPublisher<VersionCheckResult, Error> {
+    ) -> AnyPublisher<VersionCheckResult, ATErrorV2> {
         repository.checkVersion(for: input)
-            .flatMap { status -> AnyPublisher<VersionCheckResult, Error> in
+            .flatMap { status -> AnyPublisher<VersionCheckResult, ATErrorV2> in
                 guard status != .notRequired else {
                     return Just(
                         VersionCheckResult(
@@ -24,7 +25,7 @@ struct CheckVersionUseCase {
                             versionInfo: nil
                         )
                     )
-                    .setFailureType(to: Error.self)
+                    .setFailureType(to: ATErrorV2.self)
                     .eraseToAnyPublisher()
                 }
 

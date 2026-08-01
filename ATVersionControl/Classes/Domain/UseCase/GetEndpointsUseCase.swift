@@ -3,6 +3,7 @@
 //  ATVersionControl
 //
 
+import AyanTechNetworkingLibrary
 import Combine
 
 struct GetEndpointsUseCase {
@@ -15,7 +16,7 @@ struct GetEndpointsUseCase {
     func execute(
         applicationName: String,
         version: String
-    ) -> AnyPublisher<[ColocationEndpoint], Error> {
+    ) -> AnyPublisher<[ColocationEndpoint], ATErrorV2> {
         repository.getEndpoints(
             applicationName: applicationName,
             version: version

@@ -3,14 +3,15 @@
 //  ATVersionControl
 //
 
+import AyanTechNetworkingLibrary
 import Combine
 
 protocol VersionRepository {
     func checkVersion(
         for input: VersionCheckInput
-    ) -> AnyPublisher<UpdateStatus, Error>
+    ) -> AnyPublisher<UpdateStatus, ATErrorV2>
 
     func getLastVersion(
         for input: VersionCheckInput
-    ) -> AnyPublisher<VersionInfo, Error>
+    ) -> AnyPublisher<VersionInfo, ATErrorV2>
 }

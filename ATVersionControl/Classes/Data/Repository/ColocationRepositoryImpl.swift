@@ -5,7 +5,6 @@
 
 import AyanTechNetworkingLibrary
 import Combine
-import Foundation
 
 struct ColocationRepositoryImpl: ColocationRepository {
     private let remoteSource: any ColocationRemoteSourceProtocol
@@ -22,7 +21,7 @@ struct ColocationRepositoryImpl: ColocationRepository {
     func getEndpoints(
         applicationName: String,
         version: String
-    ) -> AnyPublisher<[ColocationEndpoint], Error> {
+    ) -> AnyPublisher<[ColocationEndpoint], ATErrorV2> {
         tryNextLane(
             lanes: lanesInTryOrder(),
             applicationName: applicationName,
@@ -34,9 +33,9 @@ struct ColocationRepositoryImpl: ColocationRepository {
         lanes: [ColocationLane],
         applicationName: String,
         version: String
-    ) -> AnyPublisher<[ColocationEndpoint], Error> {
+    ) -> AnyPublisher<[ColocationEndpoint], ATErrorV2> {
         guard let lane = lanes.first else {
-            return Fail(error: ATErrorV2(errorType: .general) as Error)
+            return Fail(error: ATErrorV2(errorType: .general))
                 .eraseToAnyPublisher()
         }
 
@@ -47,16 +46,19 @@ struct ColocationRepositoryImpl: ColocationRepository {
         )
 
         return remoteSource.getEndpoints(request: request, lane: lane)
-            .tryMap { info in
+            .flatMap { info -> AnyPublisher<[ColocationEndpoint], ATErrorV2> in
                 let endpoints = ColocationMapper.map(info)
                 guard !endpoints.isEmpty else {
-                    throw ATErrorV2(errorType: .serialization)
+                    return Fail(error: ATErrorV2(errorType: .serialization))
+                        .eraseToAnyPublisher()
                 }
 
                 laneStore.save(lane)
-                return endpoints
+                return Just(endpoints)
+                    .setFailureType(to: ATErrorV2.self)
+                    .eraseToAnyPublisher()
             }
-            .catch { error -> AnyPublisher<[ColocationEndpoint], Error> in
+            .catch { error -> AnyPublisher<[ColocationEndpoint], ATErrorV2> in
                 guard !isCancellation(error) else {
                     return Fail(error: error).eraseToAnyPublisher()
                 }
@@ -79,17 +81,10 @@ struct ColocationRepositoryImpl: ColocationRepository {
         }
     }
 
-    private func isCancellation(_ error: Error) -> Bool {
-        if let networkError = error as? ATErrorV2,
-           case .cancelled = networkError.errorType {
+    private func isCancellation(_ error: ATErrorV2) -> Bool {
+        if case .cancelled = error.errorType {
             return true
         }
-
-        if let urlError = error as? URLError,
-           urlError.code == .cancelled {
-            return true
-        }
-
-        return error is CancellationError
+        return false
     }
 }
